@@ -21,6 +21,7 @@ public Plugin myinfo =
 public void OnPluginStart()
 {
     RegConsoleCmd("debugmap", Command_debugmap);
+	RegConsoleCmd("sm_checkmap", Command_CheckFile);
 }
 
 public void OnMapStart() {
@@ -46,5 +47,31 @@ public void OnMapStart() {
 public Action Command_debugmap(int client, int args)
 {
     PrintToChatAll("\x06Radar \x08%s\x01, \x06Locations \x08%s", MapPath_Radar, MapPath_Radar_Locations);
+    return Plugin_Handled;
+}
 
+public Action Command_CheckFile(int client, int args)
+{
+	char sReply1[256], sReply2[256], sReply3[256];
+	
+    if(!FileExists(MapPath))
+		Format(sReply1, sizeof(sReply1), "Could not found file %s", MapPath);
+		
+	else
+		Format(sReply1, sizeof(sReply1), "Found file %s", MapPath);
+		
+	if(!FileExists(MapPath_Radar))
+		Format(sReply2, sizeof(sReply2), "Could not found file %s", MapPath_Radar);
+		
+	else
+		Format(sReply2, sizeof(sReply2), "Found file %s", MapPath_Radar);
+		
+	if(!FileExists(MapPath_Radar_Locations))
+		Format(sReply1, sizeof(sReply1), "Could not found file %s", MapPath_Radar_Locations);
+		
+	else
+		Format(sReply1, sizeof(sReply1), "Found file %s", MapPath_Radar_Locations);
+		
+	ReplyToCommand(client, "\x4[SM]\x01 %s\n\x4[SM]\x01 %s\n\x4[SM]\x01 %s", sReply1, sReply2, sReply3);
+	return Plugin_Handled;
 }
