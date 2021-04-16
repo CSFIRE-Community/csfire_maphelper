@@ -9,6 +9,8 @@ char MapName[PLATFORM_MAX_PATH],
     MapPath_Radar[PLATFORM_MAX_PATH],
     MapPath_Radar_Locations[PLATFORM_MAX_PATH];
 
+//#define MapName "de_inferno_old_csfire"
+
 public Plugin myinfo =
 {
     name = "csfire.gg old maps helper",
@@ -30,7 +32,8 @@ public void OnMapStart() {
     //resource/overviews/de_mapname_old_csfire_radar.dds
     //resource/overviews/de_mapname_old_csfire.txt
 
-    GetCurrentMap(MapName, sizeof(MapName));
+    //etCurrentMap(MapName, sizeof(MapName));
+    GetCurrentMap(MapName, PLATFORM_MAX_PATH);
     Format(MapPath, sizeof(MapPath), "materials/panorama/images/map_icons/screenshots/1080p/%s.png", MapName);
     Format(MapPath_Radar, sizeof(MapPath_Radar), "resource/overviews/%s_radar.dds", MapName);
     Format(MapPath_Radar_Locations, sizeof(MapPath_Radar_Locations), "resource/overviews/%s.txt", MapName);
@@ -41,8 +44,8 @@ public void OnMapStart() {
     AddFileToDownloadsTable(MapPath_Radar_Locations);
 
     //This works
-    //AddFileToDownloadsTable("resource/overviews/de_inferno_old_csfire.txt");
-    //AddFileToDownloadsTable("resource/overviews/de_inferno_old_csfire_radar.dds");
+    //AddFileToDownloadsTable("resource/overviews/de_mirage.txt");
+    //AddFileToDownloadsTable("resource/overviews/de_mirage.dds");
 }
 
 public Action Command_debugmap(int client, int args)
