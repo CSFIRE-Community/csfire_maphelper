@@ -1,6 +1,8 @@
 #include <sourcemod>
 #include <sdktools>
 
+//#include "files/filepaths.sp"
+
 #pragma semicolon 1
 #pragma newdecls required
 
@@ -34,14 +36,26 @@ public void OnMapStart() {
 
     //etCurrentMap(MapName, sizeof(MapName));
     GetCurrentMap(MapName, PLATFORM_MAX_PATH);
-    Format(MapPath, sizeof(MapPath), "materials/panorama/images/map_icons/screenshots/1080p/%s.png", MapName);
-    Format(MapPath_Radar, sizeof(MapPath_Radar), "resource/overviews/%s_radar.dds", MapName);
-    Format(MapPath_Radar_Locations, sizeof(MapPath_Radar_Locations), "resource/overviews/%s.txt", MapName);
+    if(strncmp(MapName, "de_in", 5) == 0){
+        AddFileToDownloadsTable("materials/panorama/images/map_icons/screenshots/1080p/de_inferno_old_csfire.png");
+        AddFileToDownloadsTable("resource/overviews/de_inferno_old_csfire_radar.dds");
+        AddFileToDownloadsTable("resource/overviews/de_inferno_old_csfire.txt");
+    }
+    else if(strncmp(MapName, "de_mi", 5) == 0){
+        AddFileToDownloadsTable("materials/panorama/images/map_icons/screenshots/1080p/de_mirage_old_csfire.png");
+        AddFileToDownloadsTable("resource/overviews/de_mirage_old_csfire_radar.dds");
+        AddFileToDownloadsTable("resource/overviews/de_mirage_old_csfire.txt");
+    }
+
+
+    //Format(MapPath, sizeof(MapPath), "materials/panorama/images/map_icons/screenshots/1080p/%s.png", MapName);
+    //Format(MapPath_Radar, sizeof(MapPath_Radar), "resource/overviews/%s_radar.dds", MapName);
+    //Format(MapPath_Radar_Locations, sizeof(MapPath_Radar_Locations), "resource/overviews/%s.txt", MapName);
 
     //this doesn't
-    AddFileToDownloadsTable(MapPath);
-    AddFileToDownloadsTable(MapPath_Radar);
-    AddFileToDownloadsTable(MapPath_Radar_Locations);
+    //AddFileToDownloadsTable(MapPath);
+    //AddFileToDownloadsTable(MapPath_Radar);
+    //AddFileToDownloadsTable(MapPath_Radar_Locations);
 
     //This works
     //AddFileToDownloadsTable("resource/overviews/de_mirage.txt");
